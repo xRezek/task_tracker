@@ -1,0 +1,38 @@
+[
+    {
+        "task": "throw away",
+        "status": "todo",
+        "created_at": "2025-03-02 23:28:28",
+        "updated_at": "none"
+    },
+    {
+        "task": "dig",
+        "status": "todo",
+        "created_at": "2025-03-02 23:31:38",
+        "updated_at": "none"
+    },
+    {
+        "task": "whoooooooooosh",
+        "status": "todo",
+        "created_at": "2025-03-02 23:31:44",
+        "updated_at": "none"
+    },
+    {
+        "task": "buy bread",
+        "status": "todo",
+        "created_at": "2025-03-02 23:35:13",
+        "updated_at": "none"
+    },
+    {
+        "task": "buy water",
+        "status": "todo",
+        "created_at": "2025-03-02 23:35:49",
+        "updated_at": "none"
+    },
+    {
+        "task": "pay the bills",
+        "status": "todo",
+        "created_at": "2025-03-02 23:37:38",
+        "updated_at": "none"
+    }
+]
