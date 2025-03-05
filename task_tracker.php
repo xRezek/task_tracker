@@ -5,6 +5,8 @@ if (!file_exists($filename)) {
   $tasks = [];
 } else {
   $tasks = json_decode(file_get_contents($filename), true);
+  echo "Invalid command\n";
+  exit(1);
 }
 if ($argc < 2) {
   echo "Please enter a command [add | update | delete | list] [parameters]\n";
@@ -17,15 +19,17 @@ switch ($argv[1]) {
       echo "Please enter a task to add\n";
       exit(1);
     }
-    if ($argc == 3) {
+    if ($argc < 3) {
+      foreach ($tasks as $index => $task) {
+        echo $index + 1 . ". " . $task["task"] . " | " . $task["status"] . " | " . $task["created_at"] . " | " . $task["updated_at"] . "\n";
+      }
+    } elseif ($argc == 3) {
       $tasks[] = ["task" => $argv[2], "status" => "todo", "created_at" => date("Y-m-d H:i:s"), "updated_at" => "none"];
-      file_put_contents($filename, json_encode($tasks, JSON_PRETTY_PRINT));
       echo "Task added successfully\n";
-    }elseif ($argc > 3) {
+    } elseif ($argc > 3) {
       echo "Please enter a task in quotes\n";
       exit(1);
-    } 
-    else {
+    } else {
       echo "Please enter a task in quotes\n";
       exit(1);
     }
@@ -45,7 +49,6 @@ switch ($argv[1]) {
     echo "Task updated successfully\n";
     break;
     break;
-  case "delete":
     if ($argc < 3) {
       echo "Please enter a task number to delete\n";
       exit(1);
@@ -58,6 +61,10 @@ switch ($argv[1]) {
     echo "Task deleted successfully\n";
     break;
   case "list":
+    if (count($tasks) == 0) {
+      echo "No tasks found\n";
+      exit(1);
+    }
     if ($argc == 3) {
       switch ($argv[2]) {
         case "todo":
@@ -127,12 +134,12 @@ switch ($argv[1]) {
         $tasks[$argv[3] - 1]["status"] = "todo";
         $tasks[$argv[3] - 1]["updated_at"] = date("Y-m-d H:i:s");
         file_put_contents($filename, json_encode($tasks, JSON_PRETTY_PRINT));
-        echo "Task marked as todo\n";
-        break;
-      default:
-        echo "Invalid status\n";
         echo "Please enter a valid status [done | doing | todo]\n";
         exit(1);
         break;
-    }
+        echo "Invalid status. Please enter a valid status [done | doing | todo]\n";
 }
+        exit(1);
+        break;
+    }
+
